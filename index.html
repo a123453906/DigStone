@@ -13,6 +13,14 @@
             <option value="first">先手</option>
             <option value="last">後手</option>
         </select>
+        <span id="winBlock" style="display: none;">
+            <label for="win">最後拿取石頭的玩家:</label>
+            <select name="win" id="win">
+                <option value="default" selected disabled>選擇勝負</option>
+                <option value="win">贏</option>
+                <option value="lose"">輸</option>
+            </select>
+        </span>
     </div>
     <div>
         <span>目前出手:</span><span id='order_span'></span>&nbsp;

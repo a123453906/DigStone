@@ -1,7 +1,16 @@
 ﻿let canvas = undefined;
 
 $( document ).ready(function() {
+  canvas = new fabric.Canvas('game',{
+    hoverCursor: 'pointer',
+    selection: false,
+    targetFindTolerance: 2
+  });
   $('#order').on('change', (e) => {
+    $('#winBlock').show();
+  });
+
+  $('#win').on('change', (e) => {
     if (canvas === undefined) {
       init();
     }else{
@@ -30,20 +39,33 @@ $( document ).ready(function() {
             // for (let i = 0; i < canvas.getObjects().length; i++) {
             //   if(canvas.getObjects()[i].opacity === 0.5) canvas.remove(canvas.getObjects()[i]);
             // }
-            if(canvas.getObjects().length <= 0){
+            if(canvas.getObjects().length <= 0 && $('#win').val() == 'lose'){
               result(canvas,"你贏了!");
+            }else if(canvas.getObjects().length <= 0 && $('#win').val() == 'win'){
+              result(canvas,"你輸了!");
             }
             $('#order_span').text("你");
             $('#ok').show();
           //   clearInterval(clearStone);
           // },1000);  
         }else{
-          result(canvas,"你輸了!");
+          if($('#win').val() == 'lose'){
+            result(canvas,"你輸了!");
+          }else{
+            result(canvas,"你贏了!");
+          }
         }
         clearInterval(cpu_clear);
       },1000);
     }
   });
+
+  addText(canvas,"遊玩規則:",10,10);
+  addText(canvas,"每回合可選1-2顆石頭,",10,50);
+  addText(canvas,"選好後點選決定按鈕結束回合",10,90);
+  addText(canvas,"根據選擇的規則決定勝負",10,130);
+  addText(canvas,"請選擇先後及勝負規則開始遊戲",10,210);
+  
   // fabric.util.getRandomInt(310, 550)
 });
 
@@ -53,6 +75,7 @@ function init() {
     selection: false,
     targetFindTolerance: 2
   });
+
   canvas.on('mouse:down', function(e) {
     if (e.target && $('#order_span').text() === "你") {
       //console.log('an object was clicked! ', e.target);
@@ -113,15 +136,22 @@ function init() {
             for (let i = 0; i < canvas.getObjects().length; i++) {
               if(canvas.getObjects()[i].opacity === 0.5) canvas.remove(canvas.getObjects()[i]);
             }
-            if(canvas.getObjects().length <= 0){
+            if(canvas.getObjects().length <= 0 && $('#win').val() == 'lose'){
               result(canvas,"你贏了!");
+            }else if(canvas.getObjects().length <= 0 && $('#win').val() == 'win'){
+              result(canvas,"你輸了!");
             }
             $('#order_span').text("你");
             $('#ok').show();
           //   clearInterval(clearStone);
           // },1000);  
         }else{
-          result(canvas,"你輸了!");
+          if($('#win').val() == 'lose'){
+            result(canvas,"你輸了!");
+          }else{
+            result(canvas,"你贏了!");
+          }
+          
         }
         clearInterval(cpu_clear);
       },1000);
@@ -170,6 +200,11 @@ function drawStone(canvas,key,x,y){
     canvas.add(oImg);
   });
 
+}
+
+function addText(canvas,text,x,y){
+  var text = new fabric.Text(text, { left: x, top: y });
+  canvas.add(text);
 }
 
 function result(canvas,result){
