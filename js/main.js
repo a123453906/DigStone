@@ -39,13 +39,17 @@ $( document ).ready(function() {
             // for (let i = 0; i < canvas.getObjects().length; i++) {
             //   if(canvas.getObjects()[i].opacity === 0.5) canvas.remove(canvas.getObjects()[i]);
             // }
-            if(canvas.getObjects().length <= 0 && $('#win').val() == 'lose'){
-              result(canvas,"你贏了!");
-            }else if(canvas.getObjects().length <= 0 && $('#win').val() == 'win'){
-              result(canvas,"你輸了!");
-            }
+            
             $('#order_span').text("你");
             $('#ok').show();
+
+            if(canvas.getObjects().length <= 0 && $('#win').val() == 'lose'){
+              result(canvas,"你贏了!");
+              $('#ok').hide();
+            }else if(canvas.getObjects().length <= 0 && $('#win').val() == 'win'){
+              result(canvas,"你輸了!");
+              $('#ok').hide();
+            }
           //   clearInterval(clearStone);
           // },1000);  
         }else{
@@ -136,13 +140,17 @@ function init() {
             for (let i = 0; i < canvas.getObjects().length; i++) {
               if(canvas.getObjects()[i].opacity === 0.5) canvas.remove(canvas.getObjects()[i]);
             }
-            if(canvas.getObjects().length <= 0 && $('#win').val() == 'lose'){
-              result(canvas,"你贏了!");
-            }else if(canvas.getObjects().length <= 0 && $('#win').val() == 'win'){
-              result(canvas,"你輸了!");
-            }
+            
             $('#order_span').text("你");
             $('#ok').show();
+
+            if(canvas.getObjects().length <= 0 && $('#win').val() == 'lose'){
+              result(canvas,"你贏了!");
+              $('#ok').hide();
+            }else if(canvas.getObjects().length <= 0 && $('#win').val() == 'win'){
+              result(canvas,"你輸了!");
+              $('#ok').hide();
+            }
           //   clearInterval(clearStone);
           // },1000);  
         }else{
